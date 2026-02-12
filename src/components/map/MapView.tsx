@@ -46,6 +46,17 @@ export function MapView() {
     }
   }, [searchMarker]);
 
+  /* Fechar SaveLocationPanel com ESC */
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && clickedPosition) {
+        setClickedPosition(null);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [clickedPosition, setClickedPosition]);
+
   const handleMapClick = useCallback(
     (e: google.maps.MapMouseEvent) => {
       if (e.latLng) {
@@ -71,6 +82,8 @@ export function MapView() {
         streetViewControl: false,
         mapTypeControl: false,
         fullscreenControl: false,
+        clickableIcons: false,
+        backgroundColor: 'hsl(var(--muted))',
       }}
     >
       {/* Marcador da busca (azul) */}
@@ -102,8 +115,14 @@ export function MapView() {
         <InfoWindow
           position={clickedPosition}
           onCloseClick={() => setClickedPosition(null)}
+          options={{
+            headerDisabled: true,
+          }}
         >
-          <SaveLocationPanel position={clickedPosition} />
+          <SaveLocationPanel
+            position={clickedPosition}
+            onClose={() => setClickedPosition(null)}
+          />
         </InfoWindow>
       )}
     </GoogleMap>

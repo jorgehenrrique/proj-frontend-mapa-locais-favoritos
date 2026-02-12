@@ -6,9 +6,13 @@ import { Button } from '../ui/Button';
 
 interface SaveLocationPanelProps {
   position: LatLng;
+  onClose?: () => void;
 }
 
-export function SaveLocationPanel({ position }: SaveLocationPanelProps) {
+export function SaveLocationPanel({
+  position,
+  onClose,
+}: SaveLocationPanelProps) {
   const [name, setName] = useState('');
   const addFavorite = useFavoritesStore((s) => s.addFavorite);
 
@@ -25,7 +29,31 @@ export function SaveLocationPanel({ position }: SaveLocationPanelProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col gap-2 p-1'>
+    <form
+      onSubmit={handleSubmit}
+      className='relative flex flex-col gap-2 p-0 overflow-hidden'
+    >
+      {/* Botão fechar */}
+      {onClose && (
+        <Button
+          type='button'
+          variant='ghost'
+          size='sm'
+          onClick={onClose}
+          aria-label='Fechar'
+          className='absolute -top-0.5 -right-0.5 h-6 w-6 rounded-full p-0! '
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 20 20'
+            fill='currentColor'
+            className='h-4 w-4 text-gray-400 '
+          >
+            <path d='M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z' />
+          </svg>
+        </Button>
+      )}
+
       <p className='text-xs font-semibold text-gray-700'>Salvar este local</p>
       <p className='text-[11px] text-gray-500'>
         {position.lat.toFixed(6)}, {position.lng.toFixed(6)}

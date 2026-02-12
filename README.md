@@ -32,6 +32,7 @@ src/
 ├── components/
 │   ├── ui/                           # Componentes reutilizáveis (Button, Input)
 │   ├── map/
+│   │   ├── AdvancedMarker.tsx        # Marcador (PinElement) no mapa
 │   │   ├── MapView.tsx               # Mapa interativo
 │   │   └── SaveLocationPanel.tsx     # Painel para salvar local clicado
 │   ├── search/AddressSearch.tsx      # Busca de endereço

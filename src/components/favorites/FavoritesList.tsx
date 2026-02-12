@@ -72,7 +72,11 @@ export function FavoritesList() {
             <Button
               variant='danger'
               size='sm'
-              className='ml-2 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity'
+              className={`ml-2 shrink-0 transition-opacity ${
+                isSelected
+                  ? 'opacity-100'
+                  : 'opacity-0 lg:group-hover:opacity-100'
+              }`}
               onClick={(e) => {
                 e.stopPropagation();
                 removeFavorite(place.id);
