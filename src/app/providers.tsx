@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LoadScript } from '@react-google-maps/api';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_LIBRARIES } from '../config/env';
 import { ToastProvider } from '../components/ui/Toast';
+import { ConfirmProvider } from '../components/ui/ConfirmDialog';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,7 +37,9 @@ export function Providers({ children }: ProvidersProps) {
             </div>
           }
         >
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <ConfirmProvider>{children}</ConfirmProvider>
+          </ToastProvider>
         </LoadScript>
       </BrowserRouter>
     </QueryClientProvider>

@@ -1,5 +1,6 @@
 import { useFavoritesStore } from '../../stores/favoritesStore';
 import { useToast } from '../../hooks/useToast';
+import { useConfirm } from '../../hooks/useConfirm';
 import { Button } from '../ui/Button';
 
 export function FavoritesList() {
@@ -8,6 +9,7 @@ export function FavoritesList() {
   const selectPlace = useFavoritesStore((s) => s.selectPlace);
   const removeFavorite = useFavoritesStore((s) => s.removeFavorite);
   const { toast } = useToast();
+  const { confirm } = useConfirm();
 
   if (favorites.length === 0) {
     return (
@@ -83,10 +85,18 @@ export function FavoritesList() {
                   ? 'opacity-100'
                   : 'opacity-0 lg:group-hover:opacity-100'
               }`}
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.stopPropagation();
-                removeFavorite(place.id);
-                toast(`"${place.name}" removido dos favoritos`, 'info');
+                const confirmed = await confirm({
+                  title: 'Remover local favorito',
+                  message: `Tem certeza que deseja remover "${place.name}" dos seus favoritos?`,
+                  confirmLabel: 'Remover',
+                  cancelLabel: 'Cancelar',
+                });
+                if (confirmed) {
+                  removeFavorite(place.id);
+                  toast(`"${place.name}" removido dos favoritos`, 'info');
+                }
               }}
               aria-label={`Remover ${place.name}`}
             >
