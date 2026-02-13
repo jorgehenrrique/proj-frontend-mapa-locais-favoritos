@@ -6,10 +6,10 @@ import { ThemeToggle } from '../components/ui/ThemeToggle';
 export function MapPage() {
   return (
     <div className='flex h-dvh flex-col lg:flex-row overflow-hidden'>
-      {/* Sidebar */}
-      <aside className='flex w-full shrink-0 flex-col border-b border-[hsl(var(--border))] bg-[hsl(var(--background))] max-h-[45dvh] lg:max-h-none lg:h-full lg:w-96 lg:border-b-0 lg:border-r'>
+      {/* Sidebar — glassmorphism */}
+      <aside className='sidebar-glass flex w-full shrink-0 flex-col border-b border-[hsl(var(--border))]/50 max-h-[45dvh] lg:max-h-none lg:h-full lg:w-96 lg:border-b-0 lg:border-r'>
         {/* Header */}
-        <header className='flex items-center justify-between border-b border-[hsl(var(--border))] px-4 py-3 lg:py-4'>
+        <header className='flex items-center justify-between border-b border-[hsl(var(--border))]/50 px-4 py-3 lg:py-4'>
           <div>
             <h1 className='text-base lg:text-lg font-bold text-[hsl(var(--foreground))]'>
               Mapa de Locais Favoritos
@@ -22,7 +22,7 @@ export function MapPage() {
         </header>
 
         {/* Busca */}
-        <div className='border-b border-[hsl(var(--border))] px-4 py-3'>
+        <div className='border-b border-[hsl(var(--border))]/50 px-4 py-3'>
           <AddressSearch />
         </div>
 
