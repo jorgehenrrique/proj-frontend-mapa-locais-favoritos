@@ -28,7 +28,7 @@ src/
 ├── config/env.ts                     # Variáveis de ambiente e constantes
 ├── types/map.ts                      # Interfaces TypeScript
 ├── stores/favoritesStore.ts          # Estado global (Zustand + persist)
-├── hooks/useGeocode.ts               # Hook de geocoding (React Query)
+├── hooks/                            # Hooks (useGeocode, useToast, useConfirm)
 ├── components/
 │   ├── ui/                           # Componentes reutilizáveis (Button, Input)
 │   ├── map/

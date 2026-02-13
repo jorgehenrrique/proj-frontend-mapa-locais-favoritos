@@ -13,14 +13,13 @@ const containerStyle: React.CSSProperties = {
 export function MapView() {
   const mapRef = useRef<google.maps.Map | null>(null);
 
-  const {
-    favorites,
-    selectedPlace,
-    mapCenter,
-    searchMarker,
-    clickedPosition,
-    setClickedPosition,
-  } = useFavoritesStore();
+  /* Seletores individuais — evita re-render do mapa quando estado não relacionado muda */
+  const favorites = useFavoritesStore((s) => s.favorites);
+  const selectedPlace = useFavoritesStore((s) => s.selectedPlace);
+  const mapCenter = useFavoritesStore((s) => s.mapCenter);
+  const searchMarker = useFavoritesStore((s) => s.searchMarker);
+  const clickedPosition = useFavoritesStore((s) => s.clickedPosition);
+  const setClickedPosition = useFavoritesStore((s) => s.setClickedPosition);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;

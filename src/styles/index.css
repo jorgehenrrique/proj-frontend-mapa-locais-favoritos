@@ -103,6 +103,7 @@
     radial-gradient(circle 310px at 55% 75%, var(--blob-3) 0%, transparent 80%),
     radial-gradient(circle 320px at 20% 90%, var(--blob-4) 0%, transparent 80%);
   filter: blur(50px);
+  will-change: transform;
   animation: sidebar-blobs 20s ease-in-out infinite alternate;
 }
 
