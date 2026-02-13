@@ -30,7 +30,7 @@ src/
 ├── stores/favoritesStore.ts          # Estado global (Zustand + persist)
 ├── hooks/                            # Hooks (useGeocode, useToast, useConfirm)
 ├── components/
-│   ├── ui/                           # Componentes reutilizáveis (Button, Input)
+│   ├── ui/                           # Componentes reutilizáveis (Button, Input, etc.)
 │   ├── map/
 │   │   ├── AdvancedMarker.tsx        # Marcador (PinElement) no mapa
 │   │   ├── MapView.tsx               # Mapa interativo
@@ -94,10 +94,13 @@ npm run preview
 
 - **Mapa interativo** centralizado em Uberlândia-MG
 - **Busca de endereço** com geocoding e marcador automático
+- **Multiplos resultados selecionaveis**
 - **Clique no mapa** exibe coordenadas e opção de salvar
 - **Favoritos persistentes** com nome, latitude e longitude
 - **Lista interativa** — clicar em um favorito centraliza o mapa
 - **Layout responsivo** — sidebar lateral (desktop) ou superior (mobile)
+- **Toast de ação** — informações importantes ao usuário
+- **Dialog de confirmação** — confirmação de ações críticas
 - **Loading e erros** tratados via React Query
 
 ## Obtendo a Chave da API Google
