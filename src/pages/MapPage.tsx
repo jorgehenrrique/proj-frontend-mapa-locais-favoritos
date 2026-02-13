@@ -1,6 +1,7 @@
 import { MapView } from '../components/map/MapView';
 import { AddressSearch } from '../components/search/AddressSearch';
 import { FavoritesList } from '../components/favorites/FavoritesList';
+import { ThemeToggle } from '../components/ui/ThemeToggle';
 
 export function MapPage() {
   return (
@@ -8,13 +9,16 @@ export function MapPage() {
       {/* Sidebar */}
       <aside className='flex w-full shrink-0 flex-col border-b border-[hsl(var(--border))] bg-[hsl(var(--background))] max-h-[45dvh] lg:max-h-none lg:h-full lg:w-96 lg:border-b-0 lg:border-r'>
         {/* Header */}
-        <header className='border-b border-[hsl(var(--border))] px-4 py-3 lg:py-4'>
-          <h1 className='text-base lg:text-lg font-bold text-[hsl(var(--foreground))]'>
-            Mapa de Locais Favoritos
-          </h1>
-          <p className='mt-0.5 text-xs text-[hsl(var(--muted-foreground))]'>
-            Busque, explore e salve seus locais preferidos
-          </p>
+        <header className='flex items-center justify-between border-b border-[hsl(var(--border))] px-4 py-3 lg:py-4'>
+          <div>
+            <h1 className='text-base lg:text-lg font-bold text-[hsl(var(--foreground))]'>
+              Mapa de Locais Favoritos
+            </h1>
+            <p className='mt-0.5 text-xs text-[hsl(var(--muted-foreground))]'>
+              Busque, explore e salve seus locais preferidos
+            </p>
+          </div>
+          <ThemeToggle />
         </header>
 
         {/* Busca */}

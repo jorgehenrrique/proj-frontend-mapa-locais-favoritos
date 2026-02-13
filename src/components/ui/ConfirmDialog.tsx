@@ -54,9 +54,9 @@ function ConfirmCard({
         ${exiting ? 'opacity-0' : 'opacity-100'}
       `}
     >
-      {/* Backdrop escuro */}
+      {/* Backdrop */}
       <div
-        className='absolute inset-0 bg-black/50 backdrop-blur-sm'
+        className='absolute inset-0 bg-[hsl(var(--overlay))]/50 backdrop-blur-sm'
         onClick={() => handleAction(false)}
       />
 
@@ -70,20 +70,20 @@ function ConfirmCard({
         aria-describedby='confirm-message'
         className={`
           relative z-10 mx-4 w-full max-w-sm
-          rounded-2xl border border-red-500/50
-          bg-gray-900/70 p-5 shadow-2xl shadow-black/40
+          rounded-2xl border border-[hsl(var(--destructive))]/50
+          bg-[hsl(var(--card))]/70 p-5 shadow-2xl shadow-black/40
           backdrop-blur-md
           transition-all duration-200 ease-out outline-none
           ${exiting ? 'scale-95 opacity-0' : 'scale-100 opacity-100'}
         `}
       >
         {/* Ícone de alerta */}
-        <div className='mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-red-500/15'>
+        <div className='mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--destructive))]/45'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 20 20'
             fill='currentColor'
-            className='h-5 w-5 text-red-400'
+            className='h-5 w-5 text-[hsl(var(--destructive-foreground))]'
           >
             <path
               fillRule='evenodd'
@@ -94,26 +94,24 @@ function ConfirmCard({
         </div>
 
         {/* Título */}
-        <h3 id='confirm-title' className='text-sm font-semibold text-gray-100'>
+        <h3
+          id='confirm-title'
+          className='text-sm font-semibold text-[hsl(var(--foreground))]'
+        >
           {title}
         </h3>
 
         {/* Mensagem */}
         <p
           id='confirm-message'
-          className='mt-1.5 text-sm leading-relaxed text-gray-400'
+          className='mt-1.5 text-sm leading-relaxed text-[hsl(var(--muted-foreground))]'
         >
           {message}
         </p>
 
         {/* Ações */}
         <div className='mt-5 flex items-center justify-end gap-2'>
-          <Button
-            variant='ghost'
-            size='sm'
-            onClick={() => handleAction(false)}
-            className='text-gray-300 hover:text-gray-100 hover:bg-gray-800'
-          >
+          <Button variant='ghost' size='sm' onClick={() => handleAction(false)}>
             {cancelLabel}
           </Button>
           <Button variant='danger' size='sm' onClick={() => handleAction(true)}>

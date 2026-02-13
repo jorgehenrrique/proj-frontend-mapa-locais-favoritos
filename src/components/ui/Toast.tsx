@@ -71,12 +71,15 @@ const icons: Record<ToastVariant, ReactNode> = {
   ),
 };
 
-/* Estilos por variante — fundo escuro para bom contraste */
+/* Estilos por variante — adaptam ao tema via variáveis CSS */
 const variantStyles: Record<ToastVariant, string> = {
-  success: 'bg-gray-900/60 border-emerald-500/50 text-emerald-400',
-  error: 'bg-gray-900/80 border-red-500/50 text-red-400',
-  warning: 'bg-gray-900/60 border-amber-500/50 text-amber-400',
-  info: 'bg-gray-900/60 border-blue-500/50 text-blue-400',
+  success:
+    'bg-[hsl(var(--toast-bg))]/60 border-emerald-500/50 text-emerald-400 shadow-emerald-500/10',
+  error:
+    'bg-[hsl(var(--toast-bg))]/80 border-red-500/50 text-red-400 shadow-red-500/10',
+  warning:
+    'bg-[hsl(var(--toast-bg))]/60 border-amber-500/50 text-amber-400 shadow-amber-500/10',
+  info: 'bg-[hsl(var(--toast-bg))]/60 border-blue-500/50 text-blue-400 shadow-blue-500/10',
 };
 
 /* Item individual do Toast */
@@ -108,7 +111,7 @@ function ToastItemView({
       onClick={dismiss}
       className={`
         flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3
-        shadow-lg shadow-black/40 backdrop-blur-md
+        shadow-lg backdrop-blur-md
         transition-all duration-300 ease-out
         ${variantStyles[t.variant]}
         ${exiting ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'}
