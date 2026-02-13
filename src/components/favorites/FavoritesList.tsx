@@ -1,4 +1,5 @@
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { useToast } from '../../hooks/useToast';
 import { Button } from '../ui/Button';
 
 export function FavoritesList() {
@@ -6,6 +7,7 @@ export function FavoritesList() {
   const selectedPlace = useFavoritesStore((s) => s.selectedPlace);
   const selectPlace = useFavoritesStore((s) => s.selectPlace);
   const removeFavorite = useFavoritesStore((s) => s.removeFavorite);
+  const { toast } = useToast();
 
   if (favorites.length === 0) {
     return (
@@ -80,6 +82,7 @@ export function FavoritesList() {
               onClick={(e) => {
                 e.stopPropagation();
                 removeFavorite(place.id);
+                toast(`"${place.name}" removido dos favoritos`, 'info');
               }}
               aria-label={`Remover ${place.name}`}
             >

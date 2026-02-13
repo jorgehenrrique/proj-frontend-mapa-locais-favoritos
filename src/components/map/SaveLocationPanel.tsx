@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { LatLng } from '../../types/map';
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { useToast } from '../../hooks/useToast';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 
@@ -15,16 +16,24 @@ export function SaveLocationPanel({
 }: SaveLocationPanelProps) {
   const [name, setName] = useState('');
   const addFavorite = useFavoritesStore((s) => s.addFavorite);
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim()) return;
 
-    addFavorite({
+    const result = addFavorite({
       name: name.trim(),
       lat: position.lat,
       lng: position.lng,
     });
+
+    if (!result.success) {
+      toast(result.error!, 'warning');
+      return;
+    }
+
+    toast(`"${name.trim()}" salvo com sucesso!`, 'success');
     setName('');
   };
 

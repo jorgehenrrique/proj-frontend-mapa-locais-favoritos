@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LoadScript } from '@react-google-maps/api';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_LIBRARIES } from '../config/env';
+import { ToastProvider } from '../components/ui/Toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +36,7 @@ export function Providers({ children }: ProvidersProps) {
             </div>
           }
         >
-          {children}
+          <ToastProvider>{children}</ToastProvider>
         </LoadScript>
       </BrowserRouter>
     </QueryClientProvider>

@@ -9,7 +9,7 @@ interface FavoritesState {
   searchMarker: LatLng | null;
   clickedPosition: LatLng | null;
 
-  addFavorite: (place: Omit<FavoritePlace, 'id'>) => void;
+  addFavorite: (place: Omit<FavoritePlace, 'id'>) => { success: boolean; error?: string };
   removeFavorite: (id: string) => void;
   selectPlace: (place: FavoritePlace | null) => void;
   setMapCenter: (center: LatLng) => void;
@@ -19,21 +19,36 @@ interface FavoritesState {
 
 export const useFavoritesStore = create<FavoritesState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       favorites: [],
       selectedPlace: null,
       mapCenter: null,
       searchMarker: null,
       clickedPosition: null,
 
-      addFavorite: (place) =>
-        set((state) => ({
+      addFavorite: (place) => {
+        const { favorites } = get();
+        const nameExists = favorites.some(
+          (f) => f.name.toLowerCase() === place.name.toLowerCase(),
+        );
+
+        if (nameExists) {
+          return {
+            success: false,
+            error: `Já existe um local salvo com o nome "${place.name}". Use um nome diferente.`,
+          };
+        }
+
+        set({
           favorites: [
-            ...state.favorites,
+            ...favorites,
             { ...place, id: crypto.randomUUID() },
           ],
           clickedPosition: null,
-        })),
+        });
+
+        return { success: true };
+      },
 
       removeFavorite: (id) =>
         set((state) => ({
