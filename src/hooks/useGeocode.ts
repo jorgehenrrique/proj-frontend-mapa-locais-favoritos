@@ -3,27 +3,26 @@ import type { GeocodingResult } from '../types/map';
 
 async function geocodeAddress(
   address: string,
-): Promise<GeocodingResult | null> {
-  if (!address.trim()) return null;
+): Promise<GeocodingResult[]> {
+  if (!address.trim()) return [];
 
   try {
     const geocoder = new google.maps.Geocoder();
     const response = await geocoder.geocode({ address });
 
-    if (!response.results.length) return null;
+    if (!response.results.length) return [];
 
-    const result = response.results[0];
-    return {
+    return response.results.slice(0, 3).map((result) => ({
       formattedAddress: result.formatted_address,
       location: {
         lat: result.geometry.location.lat(),
         lng: result.geometry.location.lng(),
       },
-    };
+    }));
   } catch (err: unknown) {
     // ZERO_RESULTS não é um erro real — apenas não encontrou o local
     if (err instanceof Error && err.message.includes('ZERO_RESULTS')) {
-      return null;
+      return [];
     }
     throw err;
   }

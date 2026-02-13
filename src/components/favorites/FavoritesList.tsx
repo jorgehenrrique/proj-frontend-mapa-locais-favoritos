@@ -50,11 +50,15 @@ export function FavoritesList() {
             key={place.id}
             role='button'
             tabIndex={0}
-            onClick={() => selectPlace(isSelected ? null : place)}
+            onClick={() => {
+              selectPlace(isSelected ? null : place);
+              toast(`"${place.name}" selecionado`, 'info');
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 selectPlace(isSelected ? null : place);
+                toast(`"${place.name}" selecionado`, 'info');
               }
             }}
             className={`group flex items-center justify-between rounded-lg border px-3 py-2.5 transition-all cursor-pointer ${
