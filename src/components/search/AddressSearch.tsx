@@ -137,18 +137,23 @@ export function AddressSearch() {
           <ul className='flex flex-col gap-1'>
             {results.map((result, idx) => (
               <li key={idx}>
-                <button
+                <Button
                   type='button'
+                  variant={
+                    selectedAddress === result.formattedAddress
+                      ? 'primary'
+                      : 'ghost'
+                  }
+                  size='sm'
                   onClick={() => handleSelectResult(result)}
                   className={`
-                    w-full cursor-pointer rounded-lg border px-3 py-2 text-left text-xs
-                    transition-all
-                    border-[hsl(var(--border))]
-                    hover:border-[hsl(var(--primary))]/60 hover:bg-[hsl(var(--primary))]/5
+                    w-full justify-start text-left text-xs
+                    border border-[hsl(var(--border))]
+                    hover:border-[hsl(var(--primary))]/60
                     ${
                       selectedAddress === result.formattedAddress
-                        ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))]/10 text-[hsl(var(--foreground))]'
-                        : 'text-[hsl(var(--muted-foreground))]'
+                        ? 'border-[hsl(var(--primary))]'
+                        : ''
                     }
                   `}
                 >
@@ -169,7 +174,7 @@ export function AddressSearch() {
                       {result.formattedAddress}
                     </span>
                   </span>
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
