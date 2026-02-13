@@ -74,7 +74,7 @@ const icons: Record<ToastVariant, ReactNode> = {
 /* Estilos por variante — fundo escuro para bom contraste */
 const variantStyles: Record<ToastVariant, string> = {
   success: 'bg-gray-900/50 border-emerald-500/50 text-emerald-400',
-  error: 'bg-gray-900/50 border-red-500/50 text-red-400',
+  error: 'bg-gray-900/80 border-red-500/50 text-red-400',
   warning: 'bg-gray-900/50 border-amber-500/50 text-amber-400',
   info: 'bg-gray-900/50 border-blue-500/50 text-blue-400',
 };

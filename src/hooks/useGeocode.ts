@@ -6,19 +6,27 @@ async function geocodeAddress(
 ): Promise<GeocodingResult | null> {
   if (!address.trim()) return null;
 
-  const geocoder = new google.maps.Geocoder();
-  const response = await geocoder.geocode({ address });
+  try {
+    const geocoder = new google.maps.Geocoder();
+    const response = await geocoder.geocode({ address });
 
-  if (!response.results.length) return null;
+    if (!response.results.length) return null;
 
-  const result = response.results[0];
-  return {
-    formattedAddress: result.formatted_address,
-    location: {
-      lat: result.geometry.location.lat(),
-      lng: result.geometry.location.lng(),
-    },
-  };
+    const result = response.results[0];
+    return {
+      formattedAddress: result.formatted_address,
+      location: {
+        lat: result.geometry.location.lat(),
+        lng: result.geometry.location.lng(),
+      },
+    };
+  } catch (err: unknown) {
+    // ZERO_RESULTS não é um erro real — apenas não encontrou o local
+    if (err instanceof Error && err.message.includes('ZERO_RESULTS')) {
+      return null;
+    }
+    throw err;
+  }
 }
 
 export function useGeocode(address: string) {

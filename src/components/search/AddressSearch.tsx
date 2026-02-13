@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useGeocode } from '../../hooks/useGeocode';
 import { useFavoritesStore } from '../../stores/favoritesStore';
+import { useToast } from '../../hooks/useToast';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 
@@ -8,13 +9,15 @@ export function AddressSearch() {
   const [inputValue, setInputValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { data, isLoading, isError, error } = useGeocode(searchTerm);
+  const { data, isLoading, isError, isFetched } = useGeocode(searchTerm);
 
   const setSearchMarker = useFavoritesStore((s) => s.setSearchMarker);
   const setMapCenter = useFavoritesStore((s) => s.setMapCenter);
+  const { toast } = useToast();
 
   /* Quando a busca retornar resultado, atualizar mapa */
   const lastAppliedRef = useRef<string | null>(null);
+  const lastSearchRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (data && data.formattedAddress !== lastAppliedRef.current) {
@@ -24,10 +27,37 @@ export function AddressSearch() {
     }
   }, [data, setSearchMarker, setMapCenter]);
 
+  /* Notificar quando não encontrar resultados */
+  useEffect(() => {
+    if (
+      isFetched &&
+      !isLoading &&
+      !isError &&
+      data === null &&
+      searchTerm &&
+      searchTerm !== lastSearchRef.current
+    ) {
+      lastSearchRef.current = searchTerm;
+      toast(
+        `Nenhum local encontrado para "${searchTerm}". Tente outro endereço.`,
+        'warning',
+      );
+    }
+  }, [isFetched, isLoading, isError, data, searchTerm, toast]);
+
+  /* Notificar quando ocorrer erro real */
+  useEffect(() => {
+    if (isError && searchTerm && searchTerm !== lastSearchRef.current) {
+      lastSearchRef.current = searchTerm;
+      toast('Não foi possível realizar a busca. Tente novamente.', 'error');
+    }
+  }, [isError, searchTerm, toast]);
+
   const handleSubmit = useCallback(
     (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (inputValue.trim().length > 2) {
+        lastSearchRef.current = null;
         setSearchTerm(inputValue.trim());
       }
     },
@@ -60,12 +90,6 @@ export function AddressSearch() {
       {isLoading && (
         <p className='text-xs text-[hsl(var(--muted-foreground))]'>
           Buscando endereço...
-        </p>
-      )}
-
-      {isError && (
-        <p className='text-xs text-red-500'>
-          Erro ao buscar: {(error as Error)?.message ?? 'tente novamente'}
         </p>
       )}
 
