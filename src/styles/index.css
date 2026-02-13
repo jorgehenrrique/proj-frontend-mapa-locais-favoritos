@@ -104,7 +104,7 @@
     radial-gradient(circle 320px at 20% 90%, var(--blob-4) 0%, transparent 80%);
   filter: blur(50px);
   will-change: transform;
-  animation: sidebar-blobs 20s ease-in-out infinite alternate;
+  animation: sidebar-blobs 25s ease-in-out infinite alternate;
 }
 
 /* Camada semi-transparente sobre as manchas — dá o efeito "vidro" */

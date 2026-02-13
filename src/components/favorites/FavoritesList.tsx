@@ -66,7 +66,7 @@ export function FavoritesList() {
             className={`group flex items-center justify-between rounded-lg border px-3 py-2.5 transition-all cursor-pointer ${
               isSelected
                 ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))]/10'
-                : 'border-[hsl(var(--border))] hover:border-[hsl(var(--primary))]/50 hover:bg-[hsl(var(--muted))]/50'
+                : 'border-[hsl(var(--muted-foreground))]/25 hover:border-[hsl(var(--primary))]/50 hover:bg-[hsl(var(--muted))]/50'
             }`}
           >
             <div className='flex flex-col gap-0.5 min-w-0'>
