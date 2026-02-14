@@ -3,14 +3,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LoadScript } from '@react-google-maps/api';
 import { GOOGLE_MAPS_API_KEY, GOOGLE_MAPS_LIBRARIES } from '../config/env';
+import { QUERY_RETRY_COUNT, QUERY_STALE_TIME_MS } from '../config/constants';
 import { ToastProvider } from '../components/ui/Toast';
 import { ConfirmProvider } from '../components/ui/ConfirmDialog';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 min
-      retry: 1,
+      staleTime: QUERY_STALE_TIME_MS,
+      retry: QUERY_RETRY_COUNT,
     },
   },
 });

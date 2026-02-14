@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 import { ConfirmContext, type ConfirmOptions } from '../../hooks/useConfirm';
+import { CONFIRM_DIALOG_CLOSE_DELAY_MS } from '../../config/constants';
 import { Button } from './Button';
 
 /* Card de confirmação */
@@ -26,7 +27,10 @@ function ConfirmCard({
   const handleAction = useCallback(
     (confirmed: boolean) => {
       setExiting(true);
-      setTimeout(() => (confirmed ? onConfirm() : onCancel()), 200);
+      setTimeout(
+        () => (confirmed ? onConfirm() : onCancel()),
+        CONFIRM_DIALOG_CLOSE_DELAY_MS,
+      );
     },
     [onConfirm, onCancel],
   );

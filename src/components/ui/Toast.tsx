@@ -10,6 +10,10 @@ import {
   type ToastVariant,
   type ToastItem,
 } from '../../hooks/useToast';
+import {
+  TOAST_DEFAULT_DURATION_MS,
+  TOAST_EXIT_DELAY_MS,
+} from '../../config/constants';
 
 /* Ícones por variante */
 const icons: Record<ToastVariant, ReactNode> = {
@@ -95,7 +99,7 @@ function ToastItemView({
 
   const dismiss = useCallback(() => {
     setExiting(true);
-    setTimeout(() => onDismiss(t.id), 300);
+    setTimeout(() => onDismiss(t.id), TOAST_EXIT_DELAY_MS);
   }, [onDismiss, t.id]);
 
   useEffect(() => {
@@ -128,7 +132,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const addToast = useCallback(
-    (message: string, variant: ToastVariant = 'info', duration = 4000) => {
+    (
+      message: string,
+      variant: ToastVariant = 'info',
+      duration = TOAST_DEFAULT_DURATION_MS,
+    ) => {
       const id = crypto.randomUUID();
       setToasts((prev) => [...prev, { id, message, variant, duration }]);
     },

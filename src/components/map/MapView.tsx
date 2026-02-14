@@ -1,6 +1,7 @@
 import { useCallback, useRef, useEffect } from 'react';
 import { GoogleMap, InfoWindow } from '@react-google-maps/api';
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '../../config/env';
+import { MAP_ZOOM_ON_FOCUS } from '../../config/constants';
 import { useFavoritesStore } from '../../stores/favoritesStore';
 import { SaveLocationPanel } from './SaveLocationPanel';
 import { AdvancedMarker } from './AdvancedMarker';
@@ -33,7 +34,7 @@ export function MapView() {
   useEffect(() => {
     if (mapRef.current && mapCenter) {
       mapRef.current.panTo(mapCenter);
-      mapRef.current.setZoom(15);
+      mapRef.current.setZoom(MAP_ZOOM_ON_FOCUS);
     }
   }, [mapCenter]);
 
@@ -41,7 +42,7 @@ export function MapView() {
   useEffect(() => {
     if (mapRef.current && searchMarker) {
       mapRef.current.panTo(searchMarker);
-      mapRef.current.setZoom(15);
+      mapRef.current.setZoom(MAP_ZOOM_ON_FOCUS);
     }
   }, [searchMarker]);
 

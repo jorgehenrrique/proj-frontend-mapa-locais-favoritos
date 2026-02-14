@@ -3,6 +3,7 @@ import { useGeocode } from '../../hooks/useGeocode';
 import { useFavoritesStore } from '../../stores/favoritesStore';
 import { useToast } from '../../hooks/useToast';
 import type { GeocodingResult } from '../../types/map';
+import { GEOCODE_MIN_INPUT_LENGTH } from '../../config/constants';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 
@@ -69,7 +70,7 @@ export function AddressSearch() {
   const handleSubmit = useCallback(
     (e: React.SyntheticEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (inputValue.trim().length > 2) {
+      if (inputValue.trim().length >= GEOCODE_MIN_INPUT_LENGTH) {
         lastSearchRef.current = null;
         lastAppliedRef.current = null;
         setSelectedAddress(null);
@@ -105,7 +106,7 @@ export function AddressSearch() {
         </div>
         <Button
           type='submit'
-          disabled={isLoading || inputValue.trim().length < 3}
+          disabled={isLoading || inputValue.trim().length < GEOCODE_MIN_INPUT_LENGTH}
         >
           {isLoading ? (
             <span className='inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent' />
