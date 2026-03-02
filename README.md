@@ -54,7 +54,7 @@ src/
 
 ```bash
 git clone <url-do-repositorio>
-cd project-frontend-ivara
+cd proj-frontend-mapa-locais-favoritos
 ```
 
 2. Instale as dependências:
