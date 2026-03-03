@@ -4,8 +4,8 @@ import { MapPage } from './pages/MapPage';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MapPage />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path='/' element={<MapPage />} />
+      <Route path='*' element={<Navigate to='/' replace />} />
     </Routes>
   );
 }

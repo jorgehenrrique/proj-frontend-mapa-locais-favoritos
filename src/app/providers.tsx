@@ -28,10 +28,10 @@ export function Providers({ children }: ProvidersProps) {
           googleMapsApiKey={GOOGLE_MAPS_API_KEY}
           libraries={GOOGLE_MAPS_LIBRARIES}
           loadingElement={
-            <div className="flex h-screen w-full items-center justify-center">
-              <div className="flex flex-col items-center gap-3">
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
-                <p className="text-sm text-[hsl(var(--muted-foreground))]">
+            <div className='flex h-screen w-full items-center justify-center'>
+              <div className='flex flex-col items-center gap-3'>
+                <div className='h-10 w-10 animate-spin rounded-full border-4 border-blue-500 border-t-transparent' />
+                <p className='text-sm text-[hsl(var(--muted-foreground))]'>
                   Carregando mapa...
                 </p>
               </div>
