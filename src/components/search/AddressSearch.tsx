@@ -106,7 +106,9 @@ export function AddressSearch() {
         </div>
         <Button
           type='submit'
-          disabled={isLoading || inputValue.trim().length < GEOCODE_MIN_INPUT_LENGTH}
+          disabled={
+            isLoading || inputValue.trim().length < GEOCODE_MIN_INPUT_LENGTH
+          }
         >
           {isLoading ? (
             <span className='inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent' />
@@ -122,7 +124,7 @@ export function AddressSearch() {
         </p>
       )}
 
-      {/* Resultado único — exibe inline como antes */}
+      {/* Resultado único — exibe inline */}
       {!isLoading && results && results.length === 1 && (
         <p className='text-xs text-[hsl(var(--muted-foreground))]'>
           {results[0].formattedAddress}

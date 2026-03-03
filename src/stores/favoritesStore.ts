@@ -9,7 +9,10 @@ interface FavoritesState {
   searchMarker: LatLng | null;
   clickedPosition: LatLng | null;
 
-  addFavorite: (place: Omit<FavoritePlace, 'id'>) => { success: boolean; error?: string };
+  addFavorite: (place: Omit<FavoritePlace, 'id'>) => {
+    success: boolean;
+    error?: string;
+  };
   removeFavorite: (id: string) => void;
   selectPlace: (place: FavoritePlace | null) => void;
   setMapCenter: (center: LatLng) => void;
@@ -40,10 +43,7 @@ export const useFavoritesStore = create<FavoritesState>()(
         }
 
         set({
-          favorites: [
-            ...favorites,
-            { ...place, id: crypto.randomUUID() },
-          ],
+          favorites: [...favorites, { ...place, id: crypto.randomUUID() }],
           clickedPosition: null,
         });
 
